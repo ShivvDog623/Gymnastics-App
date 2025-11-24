@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, StringConstraints
 from datetime import date
 from typing import Annotated
 
-
+# Sql Alchemy Model
 class MeetDetails(Base):
     __tablename__ = "meet_details"
 
@@ -20,6 +20,8 @@ class MeetDetails(Base):
     facility_zip = Column(Integer, nullable=False)
     start_date = Column(Date)
     end_date = Column(Date)
+
+# Pydantic Models
 class MeetDetailsCreate(BaseModel):
     meet_name: str
     host_gym: str
