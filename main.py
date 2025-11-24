@@ -1,9 +1,7 @@
-from fastapi import FastAPI
+from app.app import create_app
 
+app = create_app()  
 
-app = FastAPI(title="Gymnastics App API", version="1.0.0")
-
-
-@app.get("/")
-def root():
-    return {"message": "Welcome to the Gymnastics App API!"}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", reload=True)
