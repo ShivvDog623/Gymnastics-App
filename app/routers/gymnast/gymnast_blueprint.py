@@ -13,7 +13,7 @@ def get_all_gymnasts(db: Session = Depends(get_db)):
 # Get gymnast by ID
 @gymnast_router.get("/{gymnast_id}", response_model=GymnastResponse)
 def get_gymnast_by_id(gymnast_id: int, db: Session = Depends(get_db)):
-    gymnast_info = db.query(Gymnast).filter(Gymnast.id == gymnast_id).first()
+    gymnast_info = db.query(Gymnast).filter(Gymnast.gymnast_id == gymnast_id).first()
     if not gymnast_info:
         raise HTTPException(status_code=404, detail="Gymnast not found")
     return gymnast_info
@@ -56,7 +56,7 @@ def update_gymnast_by_number(
 
     gymnast_data = db.query(Gymnast).filter(Gymnast.gymnast_number == gymnast_number).first()
     if not gymnast_data:
-        raise HTTPException(status_code=404, detail="Meet does not exist")
+        raise HTTPException(status_code=404, detail="Gymnast does not exist")
     
 
     data = update_gymnast.model_dump(exclude_unset=True)
