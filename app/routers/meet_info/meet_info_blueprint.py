@@ -21,7 +21,7 @@ def get_meet_details_by_id(meet_id: int, db: Session = Depends(get_db)):
 # Create new meet
 @meet_details_router.post("/create", response_model=MeetDetailsCreate)
 def create_meet_details(create_meet: MeetDetailsCreate, db: Session = Depends(get_db)):
-    if db.query(MeetDetails).filter(MeetDetails.meet_name == create_meet.meet_name).first():
+    if db.query(MeetDetails).filter(MeetDetails.sanction_number == create_meet.sanction_number).first():
         raise HTTPException(status_code=404, detail="Meet already exists")
     
     # Create new meet

@@ -18,6 +18,7 @@ class MeetDetails(Base):
     facility_zip = Column(Integer, nullable=False)
     start_date = Column(Date)
     end_date = Column(Date)
+    sanction_number = Column(Integer, nullable=False, unique=True)
     sanction_organization = Column(String, nullable=False)
     number_of_judges_per_event = Column(Integer, nullable=False)
     score_entry_or_tie_break_rules = Column(String, nullable=False)
@@ -33,6 +34,7 @@ class MeetDetailsBase(BaseModel):
     facility_zip: int
     start_date: Optional[date] = None
     end_date: Optional[date] = None
+    sanction_number: int
     sanction_organization: str
     number_of_judges_per_event: int
     score_entry_or_tie_break_rules: str
@@ -56,6 +58,7 @@ class MeetDetailsUpdate(BaseModel):
     facility_zip: Optional[int] = None
     start_date: Optional[date] = None
     end_date: Optional[date] = None
+    sanction_number: Optional[int] = None
     sanction_organization: Optional[str] = None
     number_of_judges_per_event: Optional[int] = None
     score_entry_or_tie_break_rules: Optional[str] = None
