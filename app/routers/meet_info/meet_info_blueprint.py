@@ -55,7 +55,7 @@ def update_meet_details(
 
 # Delete meet by ID
 @meet_details_router.delete("/delete/{meet_id}")
-def create_meet_details(meet_id: int, db: Session = Depends(get_db)):
+def delete_meet_details(meet_id: int, db: Session = Depends(get_db)):
     delete_meet = db.query(MeetDetails).filter(MeetDetails.meet_id == meet_id).first()
     if not delete_meet:
         raise HTTPException(status_code=404, detail="Meet does not exist")
