@@ -12,11 +12,12 @@ class Coaches(Base):
     last_name = Column(String, nullable=False)
     address = Column(String, nullable=True)
     phone_number = Column(Integer, nullable=True)
-    email = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=True)
     birth_date = Column(Date, nullable=True)
     pro_expires = Column(Date, nullable=False)
     saftey_expires = Column(Date, nullable=False)
     background_check_expires = Column(Date, nullable=False)
+    coach_pro_number = Column(Integer, unique=True, nullable=False)
     U100_completed = Column(Boolean, nullable=False)
 
 # Pydantic Model
@@ -25,18 +26,20 @@ class CoachBase(BaseModel):
     last_name: str
     address: Optional[str] = None
     phone_number: Optional[int] = None
-    email: str
+    email: Optional[str] = None
     birth_date: Optional[date] = None
     pro_expires: date
     saftey_expires: date
     background_check_expires: date
+    coach_pro_number: int
     U100_completed: bool
 
 class CoachCreate(CoachBase):
     pass
 
 class CoachResponse(CoachBase):
-    coach_id: int
+    coach_id: Optional[int] = None
+    coach_pro_number: Optional[int] = None
 
     class Config:
         from_attributes = True
@@ -51,6 +54,7 @@ class CoachUpdate(BaseModel):
     pro_expires: Optional[date] = None
     saftey_expires: Optional[date] = None
     background_check_expires: Optional[date] = None
+    coach_pro_number: Optional[int] = None
     U100_completed: Optional[bool] = None
 
 
