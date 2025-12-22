@@ -8,6 +8,7 @@ from app.models.coaches import coaches_details
 from app.models.judges import judges_info
 from app.models.events import events_info 
 from app.models.gyms import gyms_info
+from app.models.gym_coaches import gym_coaches_info
 
 dbsql.Base.metadata.create_all(bind=dbsql.engine)
 
@@ -21,6 +22,7 @@ def register_routers(app):
     from app.routers.judges.judges_blueprint import judge_router
     from app.routers.events.events_blueprint import events_router
     from app.routers.gyms.gyms_blueprint import gyms_router
+    from app.routers.gyms_coaches.gyms_coaches_blueprint import gym_coaches_router
 
 
     # Include the routers
@@ -32,6 +34,7 @@ def register_routers(app):
     app.include_router(judge_router)
     app.include_router(events_router)
     app.include_router(gyms_router)
+    app.include_router(gym_coaches_router)
 
 
 
