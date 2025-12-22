@@ -5,6 +5,7 @@ from app.models.gymnast import gymnast_details
 from app.models.meet_info import meet_info 
 from app.models.director import director_details
 from app.models.coaches import coaches_details
+from app.models.judges import judges_info
 
 dbsql.Base.metadata.create_all(bind=dbsql.engine)
 
@@ -15,6 +16,8 @@ def register_routers(app):
     from app.routers.gymnast.gymnast_blueprint import gymnast_router
     from app.routers.director.director_blueprint import director_router
     from app.routers.coaches.coaches_blueprint import coach_router
+    from app.routers.judges.judges_blueprint import judge_router
+
 
     # Include the routers
     app.include_router(health_router)
@@ -22,6 +25,7 @@ def register_routers(app):
     app.include_router(gymnast_router)
     app.include_router(director_router)
     app.include_router(coach_router)
+    app.include_router(judge_router)
 
 
 def create_app():

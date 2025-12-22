@@ -38,14 +38,14 @@ def get_coach_by_pro_number(coach_pro_number: int, db: Session = Depends(get_db)
         raise HTTPException(status_code=404, detail="Coach not found")
     return coach_info
 
-# Update coach details by coach_id
-@coach_router.put("/update/{coach_id}", response_model=CoachResponse)
-def update_coach_by_id(
-    coach_id: int, 
+# Update coach details by pro number
+@coach_router.put("/update/{coach_pro_number}", response_model=CoachResponse)
+def update_coach_by_pro_number(
+    coach_pro_number: int, 
     update_coach: CoachUpdate,
     db: Session = Depends(get_db)):
 
-    coach_data = db.query(Coaches).filter(Coaches.coach_id == coach_id).first()
+    coach_data = db.query(Coaches).filter(Coaches.coach_pro_number == coach_pro_number).first()
     if not coach_data:
         raise HTTPException(status_code=404, detail="Coach does not exist")
     
@@ -61,18 +61,8 @@ def update_coach_by_id(
     return coach_data
 
 
-# Delete coach by coach number
-@coach_router.delete("/delete/{coach_id}")
-def delete_coach_by_id(coach_id: int, db: Session = Depends(get_db)):
-    delete_coach = db.query(Coaches).filter(Coaches.coach_id == coach_id).first()
-    if not delete_coach:
-        raise HTTPException(status_code=404, detail="Coach does not exist")
-    db.delete(delete_coach)
-    db.commit()
-    return delete_coach, {"detail": "Coach deleted!"}
-
-# Delete coach by coach number
-@coach_router.delete("/delete/pro-number/{coach_pro_number}")
+# Delete coach by coach pro number
+@coach_router.delete("/delete/{coach_pro_number}")
 def delete_coach_by_pro_number(coach_pro_number: int, db: Session = Depends(get_db)):
     delete_coach = db.query(Coaches).filter(Coaches.coach_pro_number == coach_pro_number).first()
     if not delete_coach:
