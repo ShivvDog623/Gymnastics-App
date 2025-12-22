@@ -47,14 +47,14 @@ def create_gymnast(create_gymnast: GymnastCreate, db: Session = Depends(get_db))
     db.refresh(new_gymnast)
     return new_gymnast
 
-# Update gymnast details by gymnast number
-@gymnast_router.put("/update/{gymnast_number}", response_model=GymnastResponse)
+# Update gymnast details by gymnast usag number
+@gymnast_router.put("/update/{usag_number}", response_model=GymnastResponse)
 def update_gymnast_by_number(
-    gymnast_number: int, 
+    usag_number: int, 
     update_gymnast: GymnastUpdate, 
     db: Session = Depends(get_db)):
 
-    gymnast_data = db.query(Gymnast).filter(Gymnast.gymnast_number == gymnast_number).first()
+    gymnast_data = db.query(Gymnast).filter(Gymnast.usag_number == usag_number).first()
     if not gymnast_data:
         raise HTTPException(status_code=404, detail="Gymnast does not exist")
     
@@ -69,10 +69,10 @@ def update_gymnast_by_number(
     db.refresh(gymnast_data)
     return gymnast_data
 
-# Delete gymnast by gymnast number
-@gymnast_router.delete("/delete/{gymnast_number}")
-def delete_gymnast_by_number(gymnast_number: int, db: Session = Depends(get_db)):
-    delete_gymnast = db.query(Gymnast).filter(Gymnast.gymnast_number == gymnast_number).first()
+# Delete gymnast by gymnast usag number
+@gymnast_router.delete("/delete/{usag_number}")
+def delete_gymnast_by_number(usag_number: int, db: Session = Depends(get_db)):
+    delete_gymnast = db.query(Gymnast).filter(Gymnast.usag_number == usag_number).first()
     if not delete_gymnast:
         raise HTTPException(status_code=404, detail="Gymnast does not exist")
     db.delete(delete_gymnast)
