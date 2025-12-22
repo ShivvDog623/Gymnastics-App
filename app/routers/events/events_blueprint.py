@@ -66,7 +66,7 @@ def update_event_by_id(
 
 # Delete event by event ID
 @events_router.delete("/delete/{event_id}")
-def delete_event_by_number(event_id: int, db: Session = Depends(get_db)):
+def delete_event_by_id(event_id: int, db: Session = Depends(get_db)):
     delete_event = db.query(Events).filter(Events.event_id == event_id).first()
     if not delete_event:
         raise HTTPException(status_code=404, detail="Event does not exist")
