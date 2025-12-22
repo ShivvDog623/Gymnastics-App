@@ -14,13 +14,11 @@ class Gymnast(Base):
     last_name = Column(String(50), nullable=False)
     birthday = Column(Date, nullable=False)
     events = Column(String, nullable=False)
-    gym_id = Column(Integer, nullable=False)
     level = Column(String, nullable=True)
     age = Column(Integer, nullable=False)
     age_division = Column(String, nullable=True)
     usag_number = Column(Integer, unique=True, nullable=False)
-    session_id = Column(Integer, nullable=False)
-    team_id = Column(Integer, nullable=True)
+    team_id = Column(Integer, nullable=False)
 
 
 # Pydantic Models
@@ -30,12 +28,10 @@ class GymnastBase(BaseModel):
     last_name: str
     birthday: date
     events: str
-    gym_id: int
     level: Optional[str] = None
     age: int
     age_division: Optional[str] = None
     usag_number: int
-    session_id: int
     team_id: Optional[int] = None
 
 class GymnastCreate(GymnastBase):
@@ -52,10 +48,8 @@ class GymnastUpdate(BaseModel):
     last_name: Optional[str] = None
     birthday: Optional[date] = None
     events: Optional[str] = None
-    gym_id: Optional[int] = None
     level: Optional[str] = None
     age: Optional[int] = None
     age_division: Optional[str] = None
     usag_number: Optional[int] = None
-    session_id: Optional[int] = None
     team_id: Optional[int] = None
