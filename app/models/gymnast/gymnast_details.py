@@ -1,5 +1,5 @@
 from app.sql_lite_db.dbsql import Base
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from pydantic import BaseModel
 from datetime import date
 from typing import Optional
@@ -18,7 +18,10 @@ class Gymnast(Base):
     age = Column(Integer, nullable=False)
     age_division = Column(String, nullable=True)
     usag_number = Column(Integer, unique=True, nullable=False)
-    team_id = Column(Integer, nullable=False)
+    
+    team_id = Column(Integer, 
+                    ForeignKey("teams.team_id", ondelete="CASCADE"), 
+                    nullable=False)
 
 
 # Pydantic Models
@@ -32,7 +35,7 @@ class GymnastBase(BaseModel):
     age: int
     age_division: Optional[str] = None
     usag_number: int
-    team_id: Optional[int] = None
+    team_id: int
 
 class GymnastCreate(GymnastBase):
     pass
