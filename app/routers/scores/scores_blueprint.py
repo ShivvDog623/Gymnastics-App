@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Depends
 from app.models.scores.scores_info import Scores, ScoreCreate, ScoreResponse, ScoreUpdate, ScoreCreateByUsag
 from app.sql_lite_db.dbsql import Session, get_db
 from app.models.gymnast.gymnast_details import Gymnast
+from app.models.judges.judges_info import Judges
+from app.dependencies.auth import get_current_judge
 
 # Create the router
 scores_router = APIRouter(prefix="/scores", tags=["Scores"])
@@ -20,8 +22,8 @@ def get_score_by_id(score_id: int, db: Session = Depends(get_db)):
     return score_info
 
 # Create new score
-@scores_router.post("/create", response_model=ScoreResponse)
-def create_score(create_score: ScoreCreateByUsag, db: Session = Depends(get_db)):
+@scores_router.post("/create/{meet_id}/events/{event_id}", response_model=ScoreResponse)
+def create_score(meet_id: int, event_id: int,create_score: ScoreCreateByUsag, db: Session = Depends(get_db), current_judge: Judges = Depends(get_current_judge)):
     
     # Checks to see if the score already exists
     gymnast = (
@@ -38,8 +40,6 @@ def create_score(create_score: ScoreCreateByUsag, db: Session = Depends(get_db))
     existing_score = (db.query(Scores)
                     .filter(
                     Scores.gymnast_id == gymnast.gymnast_id,
-                    Scores.event_id == create_score.event_id,
-                    Scores.judge_id == create_score.judge_id,
     ).first())
 
     if existing_score:
@@ -48,9 +48,9 @@ def create_score(create_score: ScoreCreateByUsag, db: Session = Depends(get_db))
     # Create new score using internal id
     new_score = Scores(
         gymnast_id=gymnast.gymnast_id,
-        event_id=create_score.event_id,
-        judge_id=create_score.judge_id,
-        meet_id=create_score.meet_id,
+        event_id=event_id,
+        judge_id=current_judge.judge_id,
+        meet_id=meet_id,
         score=create_score.score,
     )
     db.add(new_score)
@@ -74,11 +74,11 @@ def update_score_by_id(
 
 
     for field, value in data.items():
-        setattr(update_score, field, value)
+        setattr(score_data, field, value)
     
     db.commit()
-    db.refresh(update_score)
-    return update_score
+    db.refresh(score_data)
+    return score_data
 
 # Delete event by event ID
 @scores_router.delete("/delete/{score_id}")

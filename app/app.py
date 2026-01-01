@@ -11,7 +11,7 @@ from app.models.gyms import gyms_info
 from app.models.gym_coaches import gym_coaches_info
 from app.models.teams import teams_info
 from app.models.scores import scores_info
-from app.models.meet_entry import meet_entry_info
+# from app.models.meet_entry import meet_entry_info
 
 dbsql.Base.metadata.create_all(bind=dbsql.engine)
 

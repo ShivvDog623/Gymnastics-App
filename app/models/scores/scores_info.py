@@ -74,9 +74,6 @@ class ScoreResponse(ScoreBase):
 
 class ScoreCreateByUsag(BaseModel):
     usag_number: int
-    event_id: int
-    judge_id: int
-    meet_id: int
     score: ScoreDecimal
 
 class ScoreUpdate(BaseModel):
