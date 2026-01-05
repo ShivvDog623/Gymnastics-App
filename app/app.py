@@ -11,7 +11,8 @@ from app.models.gyms import gyms_info
 from app.models.gym_coaches import gym_coaches_info
 from app.models.teams import teams_info
 from app.models.scores import scores_info
-# from app.models.meet_entry import meet_entry_info
+from app.models.session import session
+from app.models.meet_entry import meet_entry_info
 
 dbsql.Base.metadata.create_all(bind=dbsql.engine)
 
@@ -29,6 +30,7 @@ def register_routers(app):
     from app.routers.teams.teams_blueprint import teams_router
     from app.routers.scores.scores_blueprint import scores_router
     from app.routers.meet_entry.meet_entry_blueprint import meet_entry_router
+    from app.routers.session.session_blueprint import session_router
 
     # Include the routers
     app.include_router(health_router)
@@ -43,6 +45,7 @@ def register_routers(app):
     app.include_router(teams_router)
     app.include_router(scores_router)
     app.include_router(meet_entry_router)
+    app.include_router(session_router)
 
 
 

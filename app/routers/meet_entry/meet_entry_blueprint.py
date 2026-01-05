@@ -48,11 +48,11 @@ def update_meet_entry_by_id(
 
 
     for field, value in data.items():
-        setattr(update_meet_entry, field, value)
+        setattr(meet_entry_data, field, value)
     
     db.commit()
-    db.refresh(update_meet_entry)
-    return update_meet_entry
+    db.refresh(meet_entry_data)
+    return meet_entry_data
 
 # Delete meet entry by meet_entry_ID
 @meet_entry_router.delete("/delete/{meet_entry_id}")

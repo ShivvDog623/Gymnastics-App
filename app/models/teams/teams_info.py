@@ -21,7 +21,7 @@ class Teams(Base):
     )
 
     __table_args__ = (
-        UniqueConstraint("external_team_id", "level", "division",
+        UniqueConstraint("gym_id", "external_team_id", "level", "division",
                         name="uq_team_external_level_division"),
     )
 

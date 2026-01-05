@@ -14,7 +14,7 @@ class MeetEntry(Base):
 
     meet_id = Column(
         Integer,
-        ForeignKey("meet_info.meet_id", ondelete="CASCADE"),
+        ForeignKey("meet_details.meet_id", ondelete="CASCADE"),
         nullable=False
     )
 
@@ -26,7 +26,7 @@ class MeetEntry(Base):
 
     session_id = Column(
         Integer,
-        ForeignKey("session.session_id", ondelete="CASCADE"),
+        ForeignKey("sessions.session_id", ondelete="CASCADE"),
         nullable=False
     )
 
@@ -36,11 +36,8 @@ class MeetEntry(Base):
         nullable=False
     )
 
-    gymnast_number = Column(Integer, nullable=False)
-
     __table_args__ = (
         UniqueConstraint("meet_id", "gymnast_id", name="uq_meet_gymnast"),
-        UniqueConstraint("meet_id", "gymnast_number", name="uq_meet_gymnast_number"),
     )
 
 
@@ -55,14 +52,12 @@ class MeetEntryCreate(MeetEntryBase):
 
 class MeetEntryResponse(MeetEntryBase):
     meet_entry_id: int
-    gymnast_number: int
 
     class Config:
         from_attributes = True
 
 class MeetEntryJudgeView(BaseModel):
     meet_entry_id: int
-    gymnast_number: int
 
 class MeetEntryUpdate(BaseModel):
     session_id: Optional[int] = None
@@ -70,4 +65,3 @@ class MeetEntryUpdate(BaseModel):
 
 class MeetEntryLookup(BaseModel):
     meet_id: int
-    gymnast_number: int
