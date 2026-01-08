@@ -6,8 +6,23 @@ from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
 from typing import Optional, List
 
+import os
+from dotenv import load_dotenv
 
-engine = create_engine("sqlite:///./gymnastics_app.db", connect_args={"check_same_thread": False})
+load_dotenv()
+
+
+DATABASE_URL = (
+    f"postgresql+psycopg://{os.getenv('DB_USER')}:"
+    f"{os.getenv('DB_PASSWORD')}@"
+    f"{os.getenv('DB_HOST')}:"
+    f"{os.getenv('DB_PORT')}/"
+    f"{os.getenv('DATABASE')}"
+)
+
+
+engine = create_engine(DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -17,4 +32,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
