@@ -12,6 +12,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+# SQL Lite conn string 
+# "sqlite:///./gymnastics_app.db", connect_args={"check_same_thread": False}
+
 DATABASE_URL = (
     f"postgresql+psycopg://{os.getenv('DB_USER')}:"
     f"{os.getenv('DB_PASSWORD')}@"
