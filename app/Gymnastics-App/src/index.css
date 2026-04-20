@@ -1,2 +1,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@layer components {
+    .navy-blue {
+        background-color: #0F172A !important;
+    }
+
+    .little-darker-purple {
+        background-color: #0000FF !important;
+    }
+
+    .purple {
+        background-color: #6366F1 !important;
+    }
+}
