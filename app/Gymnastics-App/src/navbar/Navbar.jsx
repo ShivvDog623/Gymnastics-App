@@ -12,7 +12,7 @@ function NavBar() {
                 <a className="btn btn-ghost text-xl">StickScore</a>
             </div>
             <div className="navbar-end">
-                <button className="btn bg-blue-600">Login</button>
+                <button className="btn bg-blue-500 hover:bg-blue-600">Login</button>
             </div>
         </div>
     )
