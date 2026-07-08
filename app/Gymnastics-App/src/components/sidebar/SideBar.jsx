@@ -1,8 +1,8 @@
-import NavBar from "../navbar/Navbar"
-import Home from "../pages/Home"
-import Admin from "../pages/Admin"
-import CreateMeetPage from "../pages/CreateMeetPage"
-import Session from "../pages/Session"
+import NavBar from "../../components/navbar/Navbar.jsx"
+import Home from "../../pages/Home.jsx"
+import Admin from "../../pages/Admin"
+import CreateMeetPage from "../../pages/CreateMeetPage"
+import Session from "../../pages/Session"
 import { Routes, Route } from "react-router-dom"
 
 import { HomeIcon, Cog6ToothIcon, ChartBarIcon, UsersIcon, KeyIcon, ComputerDesktopIcon, FolderOpenIcon } from "@heroicons/react/24/outline"

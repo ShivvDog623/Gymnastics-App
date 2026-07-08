@@ -89,7 +89,7 @@ function AgeRangeModal({ isOpen, onClose, ageGroups, onSave }) {
                 <button className="btn btn-outline mt-3 w-full" onClick={addGroup}>+ Add Group</button>
 
                 <div className="modal-action">
-                    <button className="btn" onClick={handleClose}>Cancel</button>
+                    <button className="btn btn-error" onClick={handleClose}>Cancel</button>
                     <button className="btn btn-primary" onClick={handleSave}>Save</button>
                 </div>
             </div>
