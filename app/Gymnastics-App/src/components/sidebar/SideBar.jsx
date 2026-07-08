@@ -3,6 +3,7 @@ import Home from "../../pages/Home.jsx"
 import Admin from "../../pages/Admin"
 import CreateMeetPage from "../../pages/CreateMeetPage"
 import Session from "../../pages/Session"
+import GymPage from "../../pages/Gym"
 import { Routes, Route } from "react-router-dom"
 
 import { HomeIcon, Cog6ToothIcon, ChartBarIcon, UsersIcon, KeyIcon, ComputerDesktopIcon, FolderOpenIcon } from "@heroicons/react/24/outline"
@@ -28,6 +29,7 @@ function SideBar() {
                         <Route path="/admin" element={<Admin />} />
                         <Route path="/create-meet" element={<CreateMeetPage />} />
                         <Route path="/session" element={<Session />} />
+                        <Route path="/gym" element={<GymPage />} />
                     </Routes>
                 </div>
             </div>
